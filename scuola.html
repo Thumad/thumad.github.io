@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scuola - Thomas Martelli</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="icon" type="images/IconaSito1" href="icon/IconaSito1_white.png">
+
+  <style>
+    .carousel-inner {
+      margin: 0 auto;
+      max-width: 900px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    .carousel-indicators [data-bs-target] {
+      background-color: #dc3545;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    footer.fixed-bottom {
+      font-size: 0.9rem;
+      background-color: #f8f9fa;
+    }
+    .section-images img {
+      max-height: 200px;
+    }
+    .carousel-slide-content {
+      min-height: 60vh;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center text-decoration-none" href="index.html">
+        <img src="images/IconaSito1.png" alt="Logo" width="30" height="30" class="me-2">
+        <span class="text-danger fw-bold">Thomas Martelli</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="passioni.html">Passioni</a></li>
+          <li class="nav-item"><a class="nav-link" href="scuola.html">Scuola</a></li>
+          <li class="nav-item"><a class="nav-link" href="pcto.html">PCTO</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Carosello Scuola -->
+  <div id="scuolaCarousel" class="carousel slide my-5" data-bs-ride="false" data-bs-interval="false">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#scuolaCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+      <button type="button" data-bs-target="#scuolaCarousel" data-bs-slide-to="1"></button>
+    </div>
+
+    <div class="carousel-inner">
+
+      <!-- Slide 1: Materie scolastiche -->
+      <div class="carousel-item active">
+        <div class="container py-5 text-center" style="min-height: 60vh; background-color: #f8f9fa;">
+          <h2 class="text-danger mb-4">Materie Scolastiche</h2>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+
+            <!-- Riquadro Materia 1 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria1">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia1.jpg" class="card-img-top" alt="Italiano" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Italiano - Prof.ssa Raffaeli R.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 2 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria2">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia2.jpg" class="card-img-top" alt="Inglese" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Inglese - Prof.ssa Lorusso L.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 3 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria3">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia3.jpg" class="card-img-top" alt="Storia" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Storia - Prof.ssa Raffaeli R.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 4 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria4">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia4.jpg" class="card-img-top" alt="Matematica" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Matematica - Prof. Taliani A.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 5 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria5">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia5.jpg" class="card-img-top" alt="Scienze Motorie" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Scienze Motorie - Prof. Rosini D.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 6 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria6">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia6.jpg" class="card-img-top" alt="Religione" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Religione - Prof.ssa Rinaldi G.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 7 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria7">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia7.jpg" class="card-img-top" alt="Sistemi e Reti" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Sistemi e Reti - Prof. Bartoloni A. e Prof. Cacciamani A.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 8 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria8">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia8.jpg" class="card-img-top" alt="TPSIT" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">TPSIT - Prof. Pallotta E. e Prof.ssa Zingaretti E.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 9 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria9">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia9.jpg" class="card-img-top" alt="GPOI" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">GPOI - Prof. Arcangeli M.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 10 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria10">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia10.jpg" class="card-img-top" alt="Intelligenza Artificiale" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Intelligenza Artificiale - Prof. Falcionelli N. e Prof.ssa Zingaretti E.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 11 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria11">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia11.jpg" class="card-img-top" alt="Informatica" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Informatica - Prof. Falcionelli N. e Prof. Aquilanti M.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Riquadro Materia 12 -->
+            <div class="col">
+              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria12">
+                <div class="ratio ratio-4x3">
+                  <img src="images/materia12.jpg" class="card-img-top" alt="Ed. Civica" style="object-fit: cover;">
+                </div>
+                <div class="card-body">
+                  <p class="card-text">Ed. Civica - Interdisciplinare</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Progetti -->
+      <div class="carousel-item">
+        <div class="container py-5 text-center" style="min-height: 60vh; background-color: #e9ecef;">
+          <h2 class="text-danger mb-3">Progetti scolastici</h2>
+          <p class="mx-auto" style="max-width: 700px;">
+            Il progetto a cui ho partecipato durante il quinto anno scolastico è il progeto per la Protezione Civile.
+            Questo consisteva nella creazione di un'Applicazione Web da consegnare ai Vigili del fuoco per il controllo e monitoraggio degli idranti che si trovano in Italia.
+            Ogni idrante può essere modificato e controllato con le sue caratteristiche, possono essere scritte delle segnalazioni per eventuali problemi e inoltre è presente la sezione di Login per gli utenti e una mappa per la visualizzazione.
+            Per lo sviluppo del progetto in classe ci siamo divisi in più gruppi per gestire le sezioni di FrontEnd e BackEnd rimanendo sempre tutti collegati tramite la piattaforma GitHub.
+          </p>
+          <div class="d-flex justify-content-center gap-4 mt-4 flex-wrap section-images">
+            <img src="images/progetto1.jpg" class="img-fluid rounded shadow" alt="Progetto Scolastico 1" style="max-width: 100%;">
+          </div>
+          <div class="mt-4">
+            <a href="https://www.instagram.com/_thomarte_/" target="_blank" class="text-danger fs-3 me-3">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://github.com/Thumad" target="_blank" class="text-dark fs-3">
+              <i class="bi bi-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modali per ogni materia -->
+  
+  <!-- Modal Materia 1 -->
+  <div class="modal fade" id="modalMateria1" tabindex="-1" aria-labelledby="modalMateria1Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria1Label">Italiano - Analisi del Testo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/italiano1.jpg" class="img-fluid rounded mb-3" alt="Italiano 1">
+              <img src="images/italiano2.jpg" class="img-fluid rounded" alt="Italiano 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: Gabriele D'Annunzio</h6>
+              <p>Gabriele D'Annunzio è uno degli autori più rappresentativi del Decadentismo italiano. La sua poetica si fonda sull’estetismo, ovvero la ricerca del bello in ogni aspetto della vita, e sul concetto del “superuomo”, un individuo superiore che si eleva al di sopra della massa, guidato dal culto della bellezza, della forza e dell’individualismo. D'Annunzio ha vissuto la sua vita come un’opera d’arte, incarnando in prima persona i valori di cui scriveva. Le sue opere spaziano dalla poesia al romanzo, dal teatro all’attività politica e militare. Tra le sue opere più famose troviamo Il Piacere, La Pioggia nel Pineto e Il Notturno.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 2 -->
+  <div class="modal fade" id="modalMateria2" tabindex="-1" aria-labelledby="modalMateria2Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria2Label">Inglese - Conversazione e Grammatica</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/inglese1.jpg" class="img-fluid rounded mb-3" alt="Inglese 1">
+              <img src="images/inglese2.jpg" class="img-fluid rounded" alt="Inglese 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: Osacar Wilde</h6>
+              <p>Oscar Wilde è stato un brillante scrittore irlandese dell'età vittoriana, noto per il suo stile raffinato, ironico e provocatorio. È ricordato soprattutto per il romanzo The Picture of Dorian Gray, che affronta il tema della doppia identità, del culto dell’apparenza e della decadenza morale. Wilde fu anche un grande autore teatrale, con commedie come The Importance of Being Earnest, in cui critica con eleganza e sarcasmo l’ipocrisia della società borghese del suo tempo. La sua vita fu segnata anche da scandali e persecuzioni a causa della sua omosessualità, che lo portarono alla prigione e poi all’esilio. Wilde è considerato un simbolo della lotta per la libertà individuale e l’autenticità.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 3 -->
+  <div class="modal fade" id="modalMateria3" tabindex="-1" aria-labelledby="modalMateria3Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria3Label">Storia - La Seconda Guerra Mondiale</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/storia1.jpg" class="img-fluid rounded mb-3" alt="Storia 1">
+              <img src="images/storia2.jpg" class="img-fluid rounded" alt="Storia 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: La Belle Époque</h6>
+              <p>La Belle Époque fu un periodo storico compreso tra la fine dell’Ottocento e l’inizio della Prima Guerra Mondiale (1871–1914), caratterizzato da un clima di ottimismo, progresso e fiducia nel futuro. In questi anni si assistette a grandi innovazioni scientifiche e tecnologiche (come l’elettricità, l’automobile e il cinema), allo sviluppo della borghesia, e a una forte fioritura culturale e artistica. Parigi ne fu il simbolo con i suoi caffè, i cabaret, l’arte impressionista e la nascita dell’Art Nouveau. Tuttavia, questo periodo di apparente serenità nascondeva anche tensioni sociali e nazionalismi che esplosero con lo scoppio della Prima Guerra Mondiale nel 1914, segnando la fine di un’epoca.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 4 -->
+  <div class="modal fade" id="modalMateria4" tabindex="-1" aria-labelledby="modalMateria4Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria4Label">Matematica - Algebra e Geometria</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/matematica1.jpg" class="img-fluid rounded mb-3" alt="Matematica 1">
+              <img src="images/matematica2.jpg" class="img-fluid rounded" alt="Matematica 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: La Probabilità</h6>
+              <p>La probabilità è un ramo della matematica che studia gli eventi casuali, ossia situazioni in cui il risultato non è prevedibile con certezza. L’obiettivo è determinare quanto è probabile che un determinato evento si verifichi. I concetti fondamentali sono: spazio campionario (insieme di tutti i possibili risultati), eventi (sottoinsiemi dello spazio campionario), e probabilità (valore compreso tra 0 e 1 che rappresenta la possibilità che un evento accada). Questo strumento è fondamentale in statistica, economia, informatica, giochi, scienze naturali e sociali, e permette di prendere decisioni in condizioni di incertezza.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 5 -->
+  <div class="modal fade" id="modalMateria5" tabindex="-1" aria-labelledby="modalMateria5Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria5Label">Scienze Motorie - Attività Sportive</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/scienzemotorie1.jpg" class="img-fluid rounded mb-3" alt="Scienze Motorie 1">
+              <img src="images/scienzemotorie2.jpg" class="img-fluid rounded" alt="Scienze Motorie 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: Il Doping nello Sport</h6>
+              <p>Il doping consiste nell’assunzione di sostanze o nell’uso di pratiche proibite per migliorare in modo artificiale le prestazioni sportive. È vietato dalle normative internazionali perché altera la lealtà della competizione, danneggia la salute dell’atleta e va contro l’etica dello sport. Le sostanze dopanti possono causare gravi effetti collaterali come problemi cardiaci, squilibri ormonali, dipendenza e, in casi estremi, anche la morte. La lotta al doping è un tema centrale nello sport moderno e coinvolge educazione, controlli antidoping e sanzioni per chi infrange le regole.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 6 -->
+  <div class="modal fade" id="modalMateria6" tabindex="-1" aria-labelledby="modalMateria6Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria6Label">Religione - Storia delle Religioni</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/religione1.jpg" class="img-fluid rounded mb-3" alt="Religione 1">
+              <img src="images/religione2.jpg" class="img-fluid rounded" alt="Religione 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: Morte e Vita oltre la Vita</h6>
+              <p>Il tema della morte e di ciò che avviene dopo è al centro delle principali religioni del mondo. Nel Cristianesimo si crede nella resurrezione e nella vita eterna; per l’Islam c’è il Giudizio Finale e una vita ultraterrena in Paradiso o Inferno; l’Induismo e il Buddismo parlano di reincarnazione, in base al karma accumulato. Anche molte culture laiche o filosofiche riflettono sulla fine dell’esistenza e sul significato della vita. La riflessione sull’aldilà aiuta a dare senso al presente, influenzando comportamenti, valori e relazioni con gli altri.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 7 -->
+  <div class="modal fade" id="modalMateria7" tabindex="-1" aria-labelledby="modalMateria7Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria7Label">Sistemi e Reti - Architettura di Rete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/sistemi1.jpg" class="img-fluid rounded mb-3" alt="Sistemi e Reti 1">
+              <img src="images/sistemi2.jpg" class="img-fluid rounded" alt="Sistemi e Reti 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: La Crittografia</h6>
+              <p>La crittografia è la scienza che si occupa di proteggere le informazioni, rendendole illeggibili a chi non è autorizzato ad accedervi. Nasce con l’uso di codici segreti già nell’antichità, ma oggi è alla base della sicurezza informatica. Le moderne tecniche crittografiche utilizzano algoritmi matematici per cifrare e decifrare i dati, come nella crittografia simmetrica (stessa chiave per cifrare e decifrare) o asimmetrica (chiave pubblica e chiave privata). È essenziale per la protezione dei dati personali, delle comunicazioni online, delle transazioni bancarie e di ogni forma di informazione digitale.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 8 -->
+  <div class="modal fade" id="modalMateria8" tabindex="-1" aria-labelledby="modalMateria8Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria8Label">TPSIT - Sicurezza Informatica</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/tpsit1.jpg" class="img-fluid rounded mb-3" alt="TPSIT 1">
+              <img src="images/tpsit2.jpg" class="img-fluid rounded" alt="TPSIT 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: Tipi di Applicazioni</h6>
+              <p>Le applicazioni informatiche si distinguono in base alla piattaforma su cui operano: applicazioni desktop (installate su computer, es. Microsoft Word), applicazioni mobile (sugli smartphone, es. WhatsApp), e applicazioni web (accessibili tramite browser, es. Google Drive). Ogni tipo ha vantaggi e svantaggi: quelle desktop sono spesso più potenti, quelle mobile sono più immediate e portatili, mentre quelle web non richiedono installazione e funzionano su qualsiasi dispositivo connesso a Internet. Lo sviluppo di un’applicazione deve tenere conto dell’ambiente di esecuzione e dell’esperienza utente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 9 -->
+  <div class="modal fade" id="modalMateria9" tabindex="-1" aria-labelledby="modalMateria9Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria9Label">GPOI - Programmazione</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/gpoi1.jpg" class="img-fluid rounded mb-3" alt="GPOI 1">
+              <img src="images/gpoi2.jpg" class="img-fluid rounded" alt="GPOI 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: L'Azienda</h6>
+              <p>Un’azienda è un’organizzazione economica che produce beni o servizi per soddisfare i bisogni delle persone. È composta da risorse umane (dipendenti), materiali (strutture, macchinari) e finanziarie (capitale). Le aziende possono essere private o pubbliche, piccole o grandi, con o senza scopo di lucro. Gli elementi fondamentali sono la missione, la struttura organizzativa, e i processi produttivi. Un’impresa ha anche responsabilità sociali e ambientali: deve operare in modo sostenibile, innovativo ed etico. Lo studio dell’azienda comprende anche aspetti gestionali, economici e legislativi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 10 -->
+  <div class="modal fade" id="modalMateria10" tabindex="-1" aria-labelledby="modalMateria10Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria10Label">Intelligenza Artificiale - Machine Learning</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/ai1.jpg" class="img-fluid rounded mb-3" alt="Intelligenza Artificiale 1">
+              <img src="images/ai2.jpg" class="img-fluid rounded" alt="Intelligenza Artificiale 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: Le Reti Neurali</h6>
+              <p>Le reti neurali artificiali sono modelli matematici ispirati al funzionamento del cervello umano. Sono costituite da nodi (neuroni artificiali) organizzati in strati, che elaborano informazioni e apprendono dai dati. Grazie a tecniche come l’apprendimento supervisionato, riescono a riconoscere schemi, fare previsioni, classificare immagini, testi e suoni. Sono alla base del Deep Learning, una branca avanzata dell’Intelligenza Artificiale. Trovano applicazione in moltissimi ambiti: medicina, guida autonoma, traduzioni automatiche, riconoscimento facciale, chatbot e molto altro.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 11 -->
+  <div class="modal fade" id="modalMateria11" tabindex="-1" aria-labelledby="modalMateria11Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria11Label">Informatica - Programmazione e gestione di dati</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/informatica1.jpg" class="img-fluid rounded mb-3" alt="Informatica 1">
+              <img src="images/informatica2.webp" class="img-fluid rounded" alt="Informatica 2">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: I Database</h6>
+              <p>Un database è un insieme organizzato di dati strutturati, gestito tramite un software chiamato DBMS (Database Management System), come MySQL. Questo strumento è alla base della gestione delle informazioni nelle applicazioni moderne, dai siti web ai sistemi aziendali. I vantaggi includono l'eliminazione della ridondanza, l'integrità dei dati, la sicurezza degli accessi e la possibilità di interrogare i dati in modo efficiente. Esistono diversi tipi di database: relazionali (basati su tabelle e SQL), NoSQL (orientati a documenti o chiave-valore), e distribuiti, ciascuno adatto a scenari specifici. Gli utenti e le applicazioni interagiscono con il database tramite query. Questo strumento permette la gestione centralizzata e affidabile di grandi quantità di informazioni, sia in ambienti locali che in cloud.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Materia 12 -->
+  <div class="modal fade" id="modalMateria12" tabindex="-1" aria-labelledby="modalMateria12Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalMateria12Label">Educazione Civica - Diritti e Doveri</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="images/educazionecivica1.jpg" class="img-fluid rounded mb-3" alt="Educazione Civica 1">
+            </div>
+            <div class="col-md-6">
+              <h6>Argomento: Io non partecipo alla Guerra è la Guerra che partecipa a Me</h6>
+              <p>Questa frase richiama una riflessione profonda sul modo in cui i conflitti influenzano anche chi non li combatte direttamente. La guerra, infatti, ha conseguenze su tutta la società: civili, famiglie, economia, ambiente e cultura. Nessuno è veramente “fuori” dalla guerra. L’educazione civica ci invita a riconoscere il valore della pace, della mediazione e del rispetto dei diritti umani. L’impegno individuale nella difesa della democrazia e della non violenza è fondamentale per prevenire i conflitti e costruire una società più giusta e solidale.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer fisso -->
+  <footer class="bg-light text-center text-muted fixed-bottom py-2 border-top">
+    © 2025 Thomas Martelli - Tutti i diritti riservati  
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+
+</html>

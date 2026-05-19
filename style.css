@@ -1,0 +1,42 @@
+body {
+    background-color: white;
+    color: #000;
+  }
+  
+  .carousel-item {
+    padding: 2rem;
+  }
+  
+  h1, h2, h3 {
+    font-weight: bold;
+  }
+  
+  form label {
+    font-weight: 500;
+  }
+  
+  .carousel-item {
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    overflow: hidden;
+  }
+  
+  .carousel-inner {
+    margin: 0 auto;
+    max-width: 900px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Indicatori centrati */
+  .carousel-indicators [data-bs-target] {
+    background-color: #dc3545; /* rosso */
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+  }
+  
+  /* Footer fisso pulito */
+  footer.fixed-bottom {
+    font-size: 0.9rem; 
+    background-color: #f8f9fa;
+  }
