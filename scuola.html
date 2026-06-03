@@ -9,48 +9,496 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <link rel="icon" type="images/IconaSito1" href="icon/IconaSito1_white.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --red: #C0162C;
+      --red-dark: #8a0e1f;
+      --red-light: #e8192d;
+      --black: #0d0d0d;
+      --white: #ffffff;
+      --grey-light: #f5f5f5;
+      --grey-mid: #e0e0e0;
+      --grey-dark: #3a3a3a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background-color: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      background: var(--white) !important;
+      border-bottom: 2px solid var(--red) !important;
+      padding: 0.75rem 0;
+    }
+    .navbar-brand span {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--red) !important;
+      letter-spacing: 0.5px;
+    }
+    .nav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--black) !important;
+      position: relative;
+      padding: 0.5rem 1rem !important;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 1rem; right: 1rem;
+      height: 2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .nav-link:hover { color: var(--red) !important; }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* ─── PAGE HERO HEADER ─── */
+    .page-hero {
+      background: var(--black);
+      padding: 3.5rem 0 2.5rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 80px,
+          rgba(192,22,44,0.06) 80px,
+          rgba(192,22,44,0.06) 81px
+        ),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 80px,
+          rgba(192,22,44,0.06) 80px,
+          rgba(192,22,44,0.06) 81px
+        );
+      pointer-events: none;
+    }
+    .page-hero-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      color: var(--white);
+      margin: 0;
+      line-height: 1.1;
+    }
+    .page-hero h1 span {
+      color: var(--red);
+      font-style: italic;
+    }
+    .hero-divider {
+      width: 60px;
+      height: 3px;
+      background: var(--red);
+      margin: 1.5rem auto 0;
+    }
+
+    /* ─── CAROUSEL WRAPPER ─── */
+    .carousel-section {
+      padding: 3rem 1.5rem 5rem;
+      background: var(--white);
+    }
+
+    /* SLIDE TABS */
+    .slide-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 2.5rem;
+      border: 2px solid var(--black);
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .slide-tab {
+      padding: 0.65rem 1.8rem;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: transparent;
+      border: none;
+      color: var(--black);
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s;
+      border-right: 2px solid var(--black);
+    }
+    .slide-tab:last-child { border-right: none; }
+    .slide-tab.active {
+      background: var(--red);
+      color: var(--white);
+    }
+    .slide-tab:not(.active):hover {
+      background: var(--grey-light);
+    }
+
+    /* CAROUSEL INNER */
     .carousel-inner {
       margin: 0 auto;
-      max-width: 900px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      max-width: 1100px;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+    }
+    .carousel-item {
+      background: transparent;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    /* ─── SLIDE 1: MATERIE GRID ─── */
+    .materie-slide {
+      padding: 0;
+    }
+    .materie-heading {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .materie-heading h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--black);
+      margin: 0;
+    }
+    .materie-heading h2 span { color: var(--red); }
+    .materie-heading p {
+      font-size: 0.85rem;
+      color: var(--grey-dark);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* SUBJECT CARDS */
+    .materie-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 991px) { .materie-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 767px) { .materie-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .materie-grid { grid-template-columns: 1fr 1fr; } }
+
+    .subject-card {
+      position: relative;
+      cursor: pointer;
+      border: none;
+      border-radius: 6px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--black);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s;
+    }
+    .subject-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 14px 40px rgba(192,22,44,0.25);
+    }
+    .subject-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, opacity 0.4s ease;
+      opacity: 0.7;
+    }
+    .subject-card:hover img {
+      transform: scale(1.08);
+      opacity: 0.4;
+    }
+    .subject-card-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+      transition: background 0.3s;
+    }
+    .subject-card:hover .subject-card-overlay {
+      background: linear-gradient(to top, rgba(192,22,44,0.7) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+    }
+    .subject-card-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--white);
+      line-height: 1.3;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .subject-card-prof {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.7);
+      margin-top: 2px;
+      letter-spacing: 0.3px;
+    }
+    .subject-card-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%) scale(0);
+      color: var(--white);
+      font-size: 2rem;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .subject-card:hover .subject-card-icon {
+      transform: translate(-50%,-50%) scale(1);
+      opacity: 1;
+    }
+
+    /* ─── SLIDE 2 & 3: PROGETTI ─── */
+    .project-slide {
+      padding: 0;
+    }
+    .project-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 2px solid var(--black);
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    @media (max-width: 767px) {
+      .project-layout { grid-template-columns: 1fr; }
+    }
+    .project-img-side {
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+      min-height: 380px;
+    }
+    .project-img-side img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      opacity: 0.85;
+      padding: 1.5rem;
+    }
+    .project-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--red);
+      color: var(--white);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
+    }
+    .project-text-side {
+      padding: 2.5rem 2.5rem 2rem;
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .project-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--grey-mid);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+      user-select: none;
+    }
+    .project-text-side h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+      line-height: 1.2;
+    }
+    .project-text-side h2 span { color: var(--red); }
+    .project-divider {
+      width: 40px;
+      height: 3px;
+      background: var(--red);
+      margin-bottom: 1.25rem;
+    }
+    .project-text-side p {
+      font-size: 0.9rem;
+      color: var(--grey-dark);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .project-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 1.3rem;
+      color: var(--black);
+      text-decoration: none;
+      transition: color 0.2s;
+      margin-right: 0.75rem;
+    }
+    .project-links a:hover { color: var(--red); }
+
+    /* ─── CAROUSEL INDICATORS (custom dots) ─── */
+    .carousel-indicators {
+      position: static;
+      margin-top: 2.5rem;
+      gap: 8px;
     }
     .carousel-indicators [data-bs-target] {
-      background-color: #dc3545;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
+      background-color: var(--grey-mid);
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      border: none;
+      opacity: 1;
+      transition: background 0.3s, width 0.3s;
     }
+    .carousel-indicators .active {
+      background-color: var(--red);
+      width: 60px;
+    }
+
+    /* ─── MODALS ─── */
+    .modal-content {
+      border: none;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .modal-header {
+      background: var(--black);
+      border-bottom: none;
+      padding: 1.5rem 1.75rem;
+    }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .btn-close {
+      filter: invert(1);
+      opacity: 0.7;
+    }
+    .btn-close:hover { opacity: 1; }
+    .modal-body {
+      padding: 2rem 1.75rem;
+    }
+    .modal-body h6 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.75rem;
+    }
+    .modal-body p {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: var(--grey-dark);
+    }
+    .modal-body img {
+      border-radius: 4px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .modal-img-col img:first-child { margin-bottom: 0.75rem; }
+    .modal-accent-line {
+      width: 30px;
+      height: 3px;
+      background: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    /* ─── FOOTER ─── */
     footer.fixed-bottom {
-      font-size: 0.9rem;
-      background-color: #f8f9fa;
+      font-size: 0.8rem;
+      background: var(--black) !important;
+      color: rgba(255,255,255,0.5);
+      border-top: 1px solid rgba(192,22,44,0.4) !important;
+      letter-spacing: 0.5px;
+      padding: 0.6rem 0;
     }
-    .section-images img {
-      max-height: 200px;
+    footer span { color: var(--red); }
+
+    /* ─── ANIMATION ON LOAD ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .carousel-slide-content {
-      min-height: 60vh;
-      max-height: 60vh;
-      overflow-y: auto;
+    .subject-card {
+      animation: fadeUp 0.5s ease both;
     }
+    .subject-card:nth-child(1)  { animation-delay: 0.05s; }
+    .subject-card:nth-child(2)  { animation-delay: 0.10s; }
+    .subject-card:nth-child(3)  { animation-delay: 0.15s; }
+    .subject-card:nth-child(4)  { animation-delay: 0.20s; }
+    .subject-card:nth-child(5)  { animation-delay: 0.25s; }
+    .subject-card:nth-child(6)  { animation-delay: 0.30s; }
+    .subject-card:nth-child(7)  { animation-delay: 0.35s; }
+    .subject-card:nth-child(8)  { animation-delay: 0.40s; }
+    .subject-card:nth-child(9)  { animation-delay: 0.45s; }
+    .subject-card:nth-child(10) { animation-delay: 0.50s; }
+    .subject-card:nth-child(11) { animation-delay: 0.55s; }
+    .subject-card:nth-child(12) { animation-delay: 0.60s; }
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm sticky-top">
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center text-decoration-none" href="index.html">
-        <img src="images/IconaSito1.png" alt="Logo" width="30" height="30" class="me-2">
-        <span class="text-danger fw-bold">Thomas Martelli</span>
+        <img src="images/IconaSito1.png" alt="Logo" width="28" height="28" class="me-2">
+        <span>Thomas Martelli</span>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav gap-1">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="passioni.html">Passioni</a></li>
           <li class="nav-item"><a class="nav-link" href="scuola.html">Scuola</a></li>
@@ -60,240 +508,236 @@
     </div>
   </nav>
 
-  <!-- Carosello Scuola -->
-  <div id="scuolaCarousel" class="carousel slide my-5" data-bs-ride="false" data-bs-interval="false">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#scuolaCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
-      <button type="button" data-bs-target="#scuolaCarousel" data-bs-slide-to="1"></button>
-      <button type="button" data-bs-target="#scuolaCarousel" data-bs-slide-to="2"></button>
-    </div>
-
-    <div class="carousel-inner">
-
-      <!-- Slide 1: Materie scolastiche -->
-      <div class="carousel-item active">
-        <div class="container py-5 text-center" style="min-height: 60vh; background-color: #f8f9fa;">
-          <h2 class="text-danger mb-4">Materie Scolastiche</h2>
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-
-            <!-- Riquadro Materia 1 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria1">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia1.jpg" class="card-img-top" alt="Italiano" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Italiano - Prof.ssa Raffaeli R.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 2 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria2">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia2.jpg" class="card-img-top" alt="Inglese" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Inglese - Prof.ssa Lorusso L.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 3 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria3">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia3.jpg" class="card-img-top" alt="Storia" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Storia - Prof.ssa Raffaeli R.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 4 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria4">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia4.jpg" class="card-img-top" alt="Matematica" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Matematica - Prof. Taliani A.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 5 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria5">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia5.jpg" class="card-img-top" alt="Scienze Motorie" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Scienze Motorie - Prof. Rosini D.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 6 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria6">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia6.jpg" class="card-img-top" alt="Religione" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Religione - Prof.ssa Rinaldi G.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 7 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria7">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia7.jpg" class="card-img-top" alt="Sistemi e Reti" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Sistemi e Reti - Prof. Bartoloni A. e Prof. Cacciamani A.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 8 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria8">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia8.jpg" class="card-img-top" alt="TPSIT" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">TPSIT - Prof. Pallotta E. e Prof.ssa Zingaretti E.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 9 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria9">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia9.jpg" class="card-img-top" alt="GPOI" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">GPOI - Prof. Arcangeli M.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 10 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria10">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia10.jpg" class="card-img-top" alt="Intelligenza Artificiale" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Intelligenza Artificiale - Prof. Falcionelli N. e Prof.ssa Zingaretti E.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 11 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria11">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia11.jpg" class="card-img-top" alt="Informatica" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Informatica - Prof. Falcionelli N. e Prof. Aquilanti M.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Riquadro Materia 12 -->
-            <div class="col">
-              <div class="card h-100" role="button" data-bs-toggle="modal" data-bs-target="#modalMateria12">
-                <div class="ratio ratio-4x3">
-                  <img src="images/materia12.jpg" class="card-img-top" alt="Ed. Civica" style="object-fit: cover;">
-                </div>
-                <div class="card-body">
-                  <p class="card-text">Ed. Civica - Interdisciplinare</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2: Primo Progetto -->
-      <div class="carousel-item">
-        <div class="container py-5 text-center" style="min-height: 60vh; background-color: #e9ecef;">
-          <h2 class="text-danger mb-3">Progetti scolastici: Protezione Civile</h2>
-          <p class="mx-auto" style="max-width: 700px;">
-            Il progetto a cui ho partecipato durante il quinto anno scolastico è il progeto per la Protezione Civile.
-            Questo consisteva nella creazione di un'Applicazione Web da consegnare ai Vigili del fuoco per il controllo e monitoraggio degli idranti che si trovano in Italia.
-            Ogni idrante può essere modificato e controllato con le sue caratteristiche, possono essere scritte delle segnalazioni per eventuali problemi e inoltre è presente la sezione di Login[...]
-            Per lo sviluppo del progetto in classe ci siamo divisi in più gruppi per gestire le sezioni di FrontEnd e BackEnd rimanendo sempre tutti collegati tramite la piattaforma GitHub.
-          </p>
-          <div class="d-flex justify-content-center gap-4 mt-4 flex-wrap section-images">
-            <img src="images/progetto1.jpg" class="img-fluid rounded shadow" alt="Progetto Scolastico 1" style="max-width: 100%;">
-          </div>
-          <div class="mt-4">
-            <a href="https://www.instagram.com/_thomarte_/" target="_blank" class="text-danger fs-3 me-3">
-              <i class="bi bi-instagram"></i>
-            </a>
-            <a href="https://github.com/Thumad" target="_blank" class="text-dark fs-3">
-              <i class="bi bi-github"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3: Secondo Progetto -->
-      <div class="carousel-item">
-        <div class="container py-5 text-center" style="min-height: 60vh; background-color: #e9ecef;">
-          <h2 class="text-danger mb-3">Progetti scolastici: Scout Admin</h2>
-          <p class="mx-auto" style="max-width: 700px;">
-            Il progetto a cui ho partecipato durante il mio secondo quinto anno scolastico è il progeto per la gestione degli Scout.
-            Questa applicazione web è necessaria per l'esigenza di modernizzare e snellire la gestione burocratica dei gruppi Scout.
-            Offre la divisione delle varie sezioni di gruppi, ad esempio: Direzione di Gruppo, Staff e Famiglie dei Soci. L'obiettivo è rendere le informazioni sicure, accessibili e sempre aggiornate[...]
-            Anche durante questo progetto ci siamo divisi in più gruppi per gestire le sezioni di FrontEnd e BackEnd rimanendo sempre tutti collegati tramite la piattaforma GitHub.
-          </p>
-          <div class="d-flex justify-content-center gap-4 mt-4 flex-wrap section-images">
-            <img src="images/scoutadmin.png" class="img-fluid rounded shadow" alt="Progetto Scolastico 2" style="max-width: 100%;">
-          </div>
-          <div class="mt-4">
-            <a href="https://www.instagram.com/_thomarte_/" target="_blank" class="text-danger fs-3 me-3">
-              <i class="bi bi-instagram"></i>
-            </a>
-            <a href="https://github.com/Thumad" target="_blank" class="text-dark fs-3">
-              <i class="bi bi-github"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-eyebrow">Portfolio · ITIS · 2026</div>
+    <h1>Il Mio <span>Percorso</span><br>Scolastico</h1>
+    <div class="hero-divider"></div>
   </div>
 
-  <!-- Modali per ogni materia -->
-  
-  <!-- Modal Materia 1 -->
+  <!-- Main Carousel Section -->
+  <div class="carousel-section">
+
+    <!-- Custom Tabs -->
+    <div class="slide-tabs">
+      <button class="slide-tab active" data-slide="0">Materie</button>
+      <button class="slide-tab" data-slide="1">Protezione Civile</button>
+      <button class="slide-tab" data-slide="2">Scout Admin</button>
+    </div>
+
+    <!-- Bootstrap Carousel -->
+    <div id="scuolaCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+
+      <div class="carousel-inner">
+
+        <!-- Slide 1: Materie -->
+        <div class="carousel-item active">
+          <div class="materie-slide">
+            <div class="materie-heading">
+              <h2>Materie <span>Scolastiche</span></h2>
+              <p>Clicca su una materia per scoprirla</p>
+            </div>
+            <div class="materie-grid">
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria1">
+                <img src="images/materia1.jpg" alt="Italiano">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Italiano</div>
+                  <div class="subject-card-prof">Prof.ssa Raffaeli R.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-book-half"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria2">
+                <img src="images/materia2.jpg" alt="Inglese">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Inglese</div>
+                  <div class="subject-card-prof">Prof.ssa Lorusso L.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-translate"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria3">
+                <img src="images/materia3.jpg" alt="Storia">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Storia</div>
+                  <div class="subject-card-prof">Prof.ssa Raffaeli R.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-clock-history"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria4">
+                <img src="images/materia4.jpg" alt="Matematica">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Matematica</div>
+                  <div class="subject-card-prof">Prof. Taliani A.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-calculator"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria5">
+                <img src="images/materia5.jpg" alt="Scienze Motorie">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Scienze Motorie</div>
+                  <div class="subject-card-prof">Prof. Rosini D.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-activity"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria6">
+                <img src="images/materia6.jpg" alt="Religione">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Religione</div>
+                  <div class="subject-card-prof">Prof.ssa Rinaldi G.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-stars"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria7">
+                <img src="images/materia7.jpg" alt="Sistemi e Reti">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Sistemi e Reti</div>
+                  <div class="subject-card-prof">Prof. Bartoloni A. · Cacciamani A.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-diagram-3"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria8">
+                <img src="images/materia8.jpg" alt="TPSIT">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">TPSIT</div>
+                  <div class="subject-card-prof">Prof. Pallotta E. · Zingaretti E.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-cpu"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria9">
+                <img src="images/materia9.jpg" alt="GPOI">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">GPOI</div>
+                  <div class="subject-card-prof">Prof. Arcangeli M.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-briefcase"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria10">
+                <img src="images/materia10.jpg" alt="Intelligenza Artificiale">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Intelligenza Artificiale</div>
+                  <div class="subject-card-prof">Prof. Falcionelli N. · Zingaretti E.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-robot"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria11">
+                <img src="images/materia11.jpg" alt="Informatica">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Informatica</div>
+                  <div class="subject-card-prof">Prof. Falcionelli N. · Aquilanti M.</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-code-slash"></i></div>
+              </div>
+
+              <div class="subject-card" data-bs-toggle="modal" data-bs-target="#modalMateria12">
+                <img src="images/materia12.jpg" alt="Ed. Civica">
+                <div class="subject-card-overlay">
+                  <div class="subject-card-label">Ed. Civica</div>
+                  <div class="subject-card-prof">Interdisciplinare</div>
+                </div>
+                <div class="subject-card-icon"><i class="bi bi-globe-europe-africa"></i></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Protezione Civile -->
+        <div class="carousel-item">
+          <div class="project-slide">
+            <div class="project-layout">
+              <div class="project-img-side">
+                <span class="project-tag">Progetto 01</span>
+                <img src="images/progetto1.jpg" alt="Protezione Civile">
+              </div>
+              <div class="project-text-side">
+                <div class="project-number">01</div>
+                <h2>Protezione <span>Civile</span></h2>
+                <div class="project-divider"></div>
+                <p>
+                  Il progetto a cui ho partecipato durante il quinto anno scolastico è la creazione di un'Applicazione Web per i Vigili del fuoco, per il controllo e monitoraggio degli idranti in Italia. Ogni idrante può essere modificato e controllato nelle sue caratteristiche, con la possibilità di scrivere segnalazioni per eventuali problemi.
+                </p>
+                <p style="font-size:0.82rem; color: #888;">
+                  Sviluppato in team con divisione FrontEnd/BackEnd · GitHub · Bootstrap
+                </p>
+                <div class="project-links">
+                  <a href="https://www.instagram.com/_thomarte_/" target="_blank"><i class="bi bi-instagram"></i></a>
+                  <a href="https://github.com/Thumad" target="_blank"><i class="bi bi-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Scout Admin -->
+        <div class="carousel-item">
+          <div class="project-slide">
+            <div class="project-layout">
+              <div class="project-img-side">
+                <span class="project-tag">Progetto 02</span>
+                <img src="images/scoutadmin.png" alt="Scout Admin">
+              </div>
+              <div class="project-text-side">
+                <div class="project-number">02</div>
+                <h2>Scout <span>Admin</span></h2>
+                <div class="project-divider"></div>
+                <p>
+                  Applicazione web per modernizzare la gestione burocratica dei gruppi Scout. Offre la divisione delle sezioni di gruppo — Direzione, Staff e Famiglie — con l'obiettivo di rendere le informazioni sicure, accessibili e sempre aggiornate.
+                </p>
+                <p style="font-size:0.82rem; color: #888;">
+                  Sviluppato in team con divisione FrontEnd/BackEnd · GitHub · Spring Boot
+                </p>
+                <div class="project-links">
+                  <a href="https://www.instagram.com/_thomarte_/" target="_blank"><i class="bi bi-instagram"></i></a>
+                  <a href="https://github.com/Thumad" target="_blank"><i class="bi bi-github"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /carousel-inner -->
+
+      <!-- Indicators -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#scuolaCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+        <button type="button" data-bs-target="#scuolaCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#scuolaCarousel" data-bs-slide-to="2"></button>
+      </div>
+
+    </div><!-- /carousel -->
+  </div><!-- /carousel-section -->
+
+
+  <!-- ─────────── MODALS ─────────── -->
+
+  <!-- Modal 1 - Italiano -->
   <div class="modal fade" id="modalMateria1" tabindex="-1" aria-labelledby="modalMateria1Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria1Label">Italiano - Analisi del Testo</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria1Label">Italiano — Analisi del Testo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/italiano1.jpg" class="img-fluid rounded mb-3" alt="Italiano 1">
-              <img src="images/italiano2.jpg" class="img-fluid rounded" alt="Italiano 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/italiano1.jpg" alt="Italiano 1">
+              <img src="images/italiano2.jpg" alt="Italiano 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: Gabriele D'Annunzio</h6>
-              <p>Gabriele D'Annunzio è uno degli autori più rappresentativi del Decadentismo italiano. La sua poetica si fonda sull'estetismo, ovvero la ricerca del bello in ogni aspetto della vit[...]
+              <p>Gabriele D'Annunzio è uno degli autori più rappresentativi del Decadentismo italiano. La sua poetica si fonda sull'estetismo, ovvero la ricerca del bello in ogni aspetto della vita, e sul superomismo, derivato dalla filosofia di Nietzsche. Fu poeta, romanziere, drammaturgo e figura politica di grande impatto culturale tra fine Ottocento e inizio Novecento.</p>
             </div>
           </div>
         </div>
@@ -301,23 +745,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 2 -->
+  <!-- Modal 2 - Inglese -->
   <div class="modal fade" id="modalMateria2" tabindex="-1" aria-labelledby="modalMateria2Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria2Label">Inglese - Conversazione e Grammatica</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria2Label">Inglese — Conversazione e Grammatica</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/inglese1.jpg" class="img-fluid rounded mb-3" alt="Inglese 1">
-              <img src="images/inglese2.jpg" class="img-fluid rounded" alt="Inglese 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/inglese1.jpg" alt="Inglese 1">
+              <img src="images/inglese2.jpg" alt="Inglese 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: Oscar Wilde</h6>
-              <p>Oscar Wilde è stato un brillante scrittore irlandese dell'età vittoriana, noto per il suo stile raffinato, ironico e provocatorio. È ricordato soprattutto per il romanzo The Pictur[...]
+              <p>Oscar Wilde è stato un brillante scrittore irlandese dell'età vittoriana, noto per il suo stile raffinato, ironico e provocatorio. È ricordato soprattutto per il romanzo The Picture of Dorian Gray e per le sue commedie teatrali. La sua vita fu segnata da un processo per "immoralità" che lo condannò ai lavori forzati, diventando simbolo di libertà intellettuale e artistica.</p>
             </div>
           </div>
         </div>
@@ -325,23 +770,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 3 -->
+  <!-- Modal 3 - Storia -->
   <div class="modal fade" id="modalMateria3" tabindex="-1" aria-labelledby="modalMateria3Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria3Label">Storia - La Seconda Guerra Mondiale</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria3Label">Storia — La Seconda Guerra Mondiale</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/storia1.jpg" class="img-fluid rounded mb-3" alt="Storia 1">
-              <img src="images/storia2.jpg" class="img-fluid rounded" alt="Storia 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/storia1.jpg" alt="Storia 1">
+              <img src="images/storia2.jpg" alt="Storia 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: La Belle Époque</h6>
-              <p>La Belle Époque fu un periodo storico compreso tra la fine dell'Ottocento e l'inizio della Prima Guerra Mondiale (1871–1914), caratterizzato da un clima di ottimismo, progresso[...]
+              <p>La Belle Époque fu un periodo storico compreso tra la fine dell'Ottocento e l'inizio della Prima Guerra Mondiale (1871–1914), caratterizzato da un clima di ottimismo, progresso scientifico e fioritura culturale. Fu il tempo dei grandi esposizioni universali, dell'impressionismo, del cinema e delle prime conquiste sociali — prima che la guerra spezzasse l'illusione di un progresso inarrestabile.</p>
             </div>
           </div>
         </div>
@@ -349,23 +795,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 4 -->
+  <!-- Modal 4 - Matematica -->
   <div class="modal fade" id="modalMateria4" tabindex="-1" aria-labelledby="modalMateria4Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria4Label">Matematica - Algebra e Geometria</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria4Label">Matematica — Algebra e Geometria</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/matematica1.jpg" class="img-fluid rounded mb-3" alt="Matematica 1">
-              <img src="images/matematica2.jpg" class="img-fluid rounded" alt="Matematica 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/matematica1.jpg" alt="Matematica 1">
+              <img src="images/matematica2.jpg" alt="Matematica 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: La Probabilità</h6>
-              <p>La probabilità è un ramo della matematica che studia gli eventi casuali, ossia situazioni in cui il risultato non è prevedibile con certezza. L'obiettivo è determinare quanto è[...]
+              <p>La probabilità è un ramo della matematica che studia gli eventi casuali, ossia situazioni in cui il risultato non è prevedibile con certezza. L'obiettivo è determinare quanto è probabile che un evento si verifichi. Le sue applicazioni spaziano dalla statistica alla finanza, dai giochi d'azzardo alle previsioni meteorologiche.</p>
             </div>
           </div>
         </div>
@@ -373,23 +820,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 5 -->
+  <!-- Modal 5 - Scienze Motorie -->
   <div class="modal fade" id="modalMateria5" tabindex="-1" aria-labelledby="modalMateria5Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria5Label">Scienze Motorie - Attività Sportive</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria5Label">Scienze Motorie — Attività Sportive</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/scienzemotorie1.jpg" class="img-fluid rounded mb-3" alt="Scienze Motorie 1">
-              <img src="images/scienzemotorie2.jpg" class="img-fluid rounded" alt="Scienze Motorie 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/scienzemotorie1.jpg" alt="Scienze Motorie 1">
+              <img src="images/scienzemotorie2.jpg" alt="Scienze Motorie 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: Il Doping nello Sport</h6>
-              <p>Il doping consiste nell'assunzione di sostanze o nell'uso di pratiche proibite per migliorare in modo artificiale le prestazioni sportive. È vietato dalle normative internazional[...]
+              <p>Il doping consiste nell'assunzione di sostanze o nell'uso di pratiche proibite per migliorare artificialmente le prestazioni sportive. È vietato dalle normative internazionali e combattuto dalle organizzazioni mondiali come la WADA. Oltre al danno etico e competitivo, comporta gravi rischi per la salute degli atleti.</p>
             </div>
           </div>
         </div>
@@ -397,23 +845,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 6 -->
+  <!-- Modal 6 - Religione -->
   <div class="modal fade" id="modalMateria6" tabindex="-1" aria-labelledby="modalMateria6Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria6Label">Religione - Storia delle Religioni</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria6Label">Religione — Storia delle Religioni</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/religione1.jpg" class="img-fluid rounded mb-3" alt="Religione 1">
-              <img src="images/religione2.jpg" class="img-fluid rounded" alt="Religione 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/religione1.jpg" alt="Religione 1">
+              <img src="images/religione2.jpg" alt="Religione 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: Morte e Vita oltre la Vita</h6>
-              <p>Il tema della morte e di ciò che avviene dopo è al centro delle principali religioni del mondo. Nel Cristianesimo si crede nella resurrezione e nella vita eterna; per l'Islam c'[...]
+              <p>Il tema della morte e di ciò che avviene dopo è al centro delle principali religioni del mondo. Nel Cristianesimo si crede nella resurrezione e nella vita eterna; per l'Islam c'è il paradiso e l'inferno; il Buddismo prevede reincarnazione fino al Nirvana. Questi temi spingono da sempre la riflessione filosofica sull'esistenza e sul senso della vita.</p>
             </div>
           </div>
         </div>
@@ -421,23 +870,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 7 -->
+  <!-- Modal 7 - Sistemi e Reti -->
   <div class="modal fade" id="modalMateria7" tabindex="-1" aria-labelledby="modalMateria7Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria7Label">Sistemi e Reti - Architettura di Rete</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria7Label">Sistemi e Reti — Architettura di Rete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/sistemi1.jpg" class="img-fluid rounded mb-3" alt="Sistemi e Reti 1">
-              <img src="images/sistemi2.jpg" class="img-fluid rounded" alt="Sistemi e Reti 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/sistemi1.jpg" alt="Sistemi e Reti 1">
+              <img src="images/sistemi2.jpg" alt="Sistemi e Reti 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: La Crittografia</h6>
-              <p>La crittografia è la scienza che si occupa di proteggere le informazioni, rendendole illeggibili a chi non è autorizzato ad accedervi. Nasce con l'uso di codici segreti già nell[...]
+              <p>La crittografia è la scienza che protegge le informazioni rendendole illeggibili a chi non è autorizzato. Nasce con i codici segreti dell'antichità e oggi comprende algoritmi avanzati come RSA e AES, fondamentali per la sicurezza di internet, le comunicazioni digitali e i pagamenti elettronici.</p>
             </div>
           </div>
         </div>
@@ -445,23 +895,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 8 -->
+  <!-- Modal 8 - TPSIT -->
   <div class="modal fade" id="modalMateria8" tabindex="-1" aria-labelledby="modalMateria8Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria8Label">TPSIT - Sicurezza Informatica</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria8Label">TPSIT — Sicurezza Informatica</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/tpsit1.png" class="img-fluid rounded mb-3" alt="TPSIT 1">
-              <img src="images/tpsit2.webp" class="img-fluid rounded" alt="TPSIT 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/tpsit1.png" alt="TPSIT 1">
+              <img src="images/tpsit2.webp" alt="TPSIT 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: I Filosofi a Cena</h6>
-              <p>I filosofi a cena sono un classico problema di sincronizzazione ideato da Dijkstra nel 1965, usato per illustrare le sfide della programmazione concorrente. Cinque filosofi siedono at[...]
+              <p>I filosofi a cena è un classico problema di sincronizzazione ideato da Dijkstra nel 1965, usato per illustrare le sfide della programmazione concorrente. Cinque filosofi siedono attorno a un tavolo con una forchetta tra ciascuna coppia: per mangiare, ognuno ha bisogno di entrambe le forchette adiacenti, creando rischi di deadlock e starvation.</p>
             </div>
           </div>
         </div>
@@ -469,23 +920,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 9 -->
+  <!-- Modal 9 - GPOI -->
   <div class="modal fade" id="modalMateria9" tabindex="-1" aria-labelledby="modalMateria9Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria9Label">GPOI - Programmazione</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria9Label">GPOI — Programmazione e Gestione</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/gpoi1.jpg" class="img-fluid rounded mb-3" alt="GPOI 1">
-              <img src="images/gpoi2.jpg" class="img-fluid rounded" alt="GPOI 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/gpoi1.jpg" alt="GPOI 1">
+              <img src="images/gpoi2.jpg" alt="GPOI 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: L'Azienda</h6>
-              <p>Un'azienda è un'organizzazione economica che produce beni o servizi per soddisfare i bisogni delle persone. È composta da risorse umane (dipendenti), materiali (strutture, macch[...]
+              <p>Un'azienda è un'organizzazione economica che produce beni o servizi per soddisfare i bisogni delle persone. È composta da risorse umane, materiali e finanziarie, ed è al centro dello studio della gestione e dell'organizzazione aziendale — fondamentale per capire il mondo del lavoro moderno.</p>
             </div>
           </div>
         </div>
@@ -493,23 +945,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 10 -->
+  <!-- Modal 10 - Intelligenza Artificiale -->
   <div class="modal fade" id="modalMateria10" tabindex="-1" aria-labelledby="modalMateria10Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria10Label">Intelligenza Artificiale - Machine Learning</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria10Label">Intelligenza Artificiale — Machine Learning</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/ai1.jpg" class="img-fluid rounded mb-3" alt="Intelligenza Artificiale 1">
-              <img src="images/ai2.jpg" class="img-fluid rounded" alt="Intelligenza Artificiale 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/ai1.jpg" alt="AI 1">
+              <img src="images/ai2.jpg" alt="AI 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: Le Reti Neurali</h6>
-              <p>Le reti neurali artificiali sono modelli matematici ispirati al funzionamento del cervello umano. Sono costituite da nodi (neuroni artificiali) organizzati in strati, che elaborano in[...]
+              <p>Le reti neurali artificiali sono modelli matematici ispirati al funzionamento del cervello umano. Sono costituite da nodi organizzati in strati — input, hidden e output — che elaborano informazioni attraverso pesi e funzioni di attivazione. Sono alla base del riconoscimento di immagini, del linguaggio naturale e dei moderni sistemi di AI generativa.</p>
             </div>
           </div>
         </div>
@@ -517,23 +970,24 @@
     </div>
   </div>
 
-  <!-- Modal Materia 11 -->
+  <!-- Modal 11 - Informatica -->
   <div class="modal fade" id="modalMateria11" tabindex="-1" aria-labelledby="modalMateria11Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria11Label">Informatica - Programmazione e gestione di dati</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria11Label">Informatica — Programmazione e Gestione Dati</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/informatica1.jpg" class="img-fluid rounded mb-3" alt="Informatica 1">
-              <img src="images/informatica2.webp" class="img-fluid rounded" alt="Informatica 2">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/informatica1.jpg" alt="Informatica 1">
+              <img src="images/informatica2.webp" alt="Informatica 2" style="margin-top:0.75rem;">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: I Database</h6>
-              <p>Un database è un insieme organizzato di dati strutturati, gestito tramite un software chiamato DBMS (Database Management System), come MySQL. Questo strumento è alla base della gest[...]
+              <p>Un database è un insieme organizzato di dati strutturati, gestito tramite un DBMS (Database Management System) come MySQL. Permette di archiviare, cercare e modificare dati in modo efficiente. È alla base di qualsiasi applicazione moderna: dai social network ai sistemi bancari, fino ai siti di e-commerce.</p>
             </div>
           </div>
         </div>
@@ -541,22 +995,23 @@
     </div>
   </div>
 
-  <!-- Modal Materia 12 -->
+  <!-- Modal 12 - Educazione Civica -->
   <div class="modal fade" id="modalMateria12" tabindex="-1" aria-labelledby="modalMateria12Label" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalMateria12Label">Educazione Civica - Diritti e Doveri</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          <h5 class="modal-title" id="modalMateria12Label">Educazione Civica — Diritti e Doveri</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="col-md-6">
-              <img src="images/educazionecivica1.jpg" class="img-fluid rounded mb-3" alt="Educazione Civica 1">
+          <div class="row g-4">
+            <div class="col-md-6 modal-img-col">
+              <img src="images/educazionecivica1.jpg" alt="Educazione Civica">
             </div>
             <div class="col-md-6">
+              <div class="modal-accent-line"></div>
               <h6>Argomento: Io non partecipo alla Guerra è la Guerra che partecipa a Me</h6>
-              <p>Questa frase richiama una riflessione profonda sul modo in cui i conflitti influenzano anche chi non li combatte direttamente. La guerra, infatti, ha conseguenze su tutta la società:[...]
+              <p>Questa frase richiama una riflessione profonda sul modo in cui i conflitti influenzano anche chi non li combatte direttamente. La guerra ha conseguenze su tutta la società: economiche, psicologiche, culturali. Anche il semplice cittadino ne è coinvolto attraverso la propaganda, le restrizioni, le perdite umane e il trauma collettivo che lascia tracce per generazioni.</p>
             </div>
           </div>
         </div>
@@ -564,12 +1019,30 @@
     </div>
   </div>
 
-  <!-- Footer fisso -->
-  <footer class="bg-light text-center text-muted fixed-bottom py-2 border-top">
-    © 2026 Thomas Martelli - Tutti i diritti riservati  
+
+  <!-- Footer -->
+  <footer class="text-center fixed-bottom py-2">
+    © 2026 <span>Thomas Martelli</span> — Tutti i diritti riservati
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+  <script>
+    // Sync custom tabs with Bootstrap carousel
+    const carousel = document.getElementById('scuolaCarousel');
+    const bsCarousel = bootstrap.Carousel.getOrCreateInstance(carousel, { ride: false, interval: false });
+    const tabs = document.querySelectorAll('.slide-tab');
 
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const idx = parseInt(tab.dataset.slide);
+        bsCarousel.to(idx);
+      });
+    });
+
+    carousel.addEventListener('slid.bs.carousel', e => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tabs[e.to].classList.add('active');
+    });
+  </script>
+</body>
 </html>

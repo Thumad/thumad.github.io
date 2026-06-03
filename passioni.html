@@ -4,155 +4,346 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Passioni - Thomas Martelli</title>
-
-  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link rel="icon" type="images/IconaSito1" href="icon/IconaSito1_white.png">
+  <link rel="icon" href="icon/IconaSito1_white.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    .carousel-inner {
-      margin: 0 auto;
-      max-width: 900px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    :root {
+      --red: #C0162C;
+      --red-dark: #8a0e1f;
+      --black: #0d0d0d;
+      --white: #ffffff;
+      --grey-light: #f5f5f5;
+      --grey-mid: #e0e0e0;
+      --grey-dark: #3a3a3a;
     }
+    * { box-sizing: border-box; }
+    body {
+      background-color: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      background: var(--white) !important;
+      border-bottom: 2px solid var(--red) !important;
+      padding: 0.75rem 0;
+    }
+    .navbar-brand span {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 1.3rem;
+      color: var(--red) !important; letter-spacing: 0.5px;
+    }
+    .nav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500; font-size: 0.9rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--black) !important;
+      position: relative; padding: 0.5rem 1rem !important;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 1rem; right: 1rem;
+      height: 2px; background: var(--red);
+      transform: scaleX(0); transition: transform 0.3s ease;
+    }
+    .nav-link:hover { color: var(--red) !important; }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      background: var(--black);
+      padding: 3.5rem 0 2.5rem;
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(192,22,44,0.06) 80px, rgba(192,22,44,0.06) 81px),
+        repeating-linear-gradient(0deg,  transparent, transparent 80px, rgba(192,22,44,0.06) 80px, rgba(192,22,44,0.06) 81px);
+      pointer-events: none;
+    }
+    .page-hero-eyebrow {
+      font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.75rem; font-weight: 600;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900;
+      color: var(--white); margin: 0; line-height: 1.1;
+    }
+    .page-hero h1 span { color: var(--red); font-style: italic; }
+    .hero-divider { width: 60px; height: 3px; background: var(--red); margin: 1.5rem auto 0; }
+
+    /* ─── CAROUSEL ─── */
+    .carousel-section { padding: 3rem 1.5rem 5rem; background: var(--white); }
+    .slide-tabs {
+      display: flex; justify-content: center;
+      margin-bottom: 2.5rem;
+      border: 2px solid var(--black); width: fit-content;
+      margin-left: auto; margin-right: auto;
+      overflow: hidden; border-radius: 4px;
+    }
+    .slide-tab {
+      padding: 0.65rem 1.8rem;
+      font-family: 'DM Sans', sans-serif; font-weight: 600;
+      font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase;
+      background: transparent; border: none; color: var(--black);
+      cursor: pointer; transition: background 0.25s, color 0.25s;
+      border-right: 2px solid var(--black);
+    }
+    .slide-tab:last-child { border-right: none; }
+    .slide-tab.active { background: var(--red); color: var(--white); }
+    .slide-tab:not(.active):hover { background: var(--grey-light); }
+
+    .carousel-inner { margin: 0 auto; max-width: 1100px; border-radius: 0; box-shadow: none; border: none; }
+    .carousel-item { background: transparent; transition: transform 0.5s ease, opacity 0.5s ease; }
+
+    .carousel-indicators { position: static; margin-top: 2.5rem; gap: 8px; }
     .carousel-indicators [data-bs-target] {
-      background-color: #dc3545;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
+      background-color: var(--grey-mid); width: 36px; height: 4px;
+      border-radius: 2px; border: none; opacity: 1;
+      transition: background 0.3s, width 0.3s;
     }
+    .carousel-indicators .active { background-color: var(--red); width: 60px; }
+
+    /* ─── FOOTER ─── */
     footer.fixed-bottom {
-      font-size: 0.9rem;
-      background-color: #f8f9fa;
+      font-size: 0.8rem; background: var(--black) !important;
+      color: rgba(255,255,255,0.5);
+      border-top: 1px solid rgba(192,22,44,0.4) !important;
+      letter-spacing: 0.5px; padding: 0.6rem 0;
     }
-    .section-images img {
-      max-height: 200px;
+    footer span { color: var(--red); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
+
+    /* ─── SLIDE 1: SPORT ─── */
+    .sport-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 2px solid var(--black); border-radius: 8px;
+      overflow: hidden; max-width: 960px; margin: 0 auto;
+    }
+    @media (max-width: 767px) { .sport-layout { grid-template-columns: 1fr; } }
+
+    .sport-img-duo {
+      background: var(--black);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+      min-height: 360px;
+    }
+    .sport-img-duo img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.75; display: block; transition: opacity 0.3s;
+    }
+    .sport-img-duo img:hover { opacity: 1; }
+
+    .passion-text-side {
+      padding: 2.5rem 2.5rem 2rem; background: var(--white);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .passion-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem; font-weight: 900;
+      color: var(--grey-mid); line-height: 1;
+      margin-bottom: 0.25rem; user-select: none;
+    }
+    .passion-text-side h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900;
+      color: var(--black); margin-bottom: 0.4rem; line-height: 1.2;
+    }
+    .passion-text-side h2 span { color: var(--red); }
+    .passion-divider { width: 40px; height: 3px; background: var(--red); margin-bottom: 1.25rem; }
+    .passion-text-side p { font-size: 0.9rem; color: var(--grey-dark); line-height: 1.8; margin-bottom: 1rem; }
+    .passion-links a {
+      display: inline-flex; align-items: center;
+      font-size: 1.3rem; color: var(--black);
+      text-decoration: none; margin-right: 0.75rem; transition: color 0.2s;
+    }
+    .passion-links a:hover { color: var(--red); }
+
+    /* ─── SLIDE 2: HOBBY CARDS ─── */
+    .hobby-heading {
+      text-align: center; margin-bottom: 2rem;
+    }
+    .hobby-heading h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: var(--black);
+    }
+    .hobby-heading h2 span { color: var(--red); font-style: italic; }
+    .hobby-heading p {
+      font-size: 0.85rem; color: var(--grey-dark);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-top: 0.4rem;
+    }
+
+    .hobby-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem; max-width: 1000px; margin: 0 auto;
+    }
+    @media (max-width: 767px) { .hobby-grid { grid-template-columns: 1fr; } }
+
+    .hobby-card {
+      border: 2px solid var(--black); border-radius: 6px;
+      overflow: hidden; background: var(--white);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .hobby-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 40px rgba(192,22,44,0.2);
+      border-color: var(--red);
+    }
+    .hobby-card-img { aspect-ratio: 16/9; overflow: hidden; background: var(--black); }
+    .hobby-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0.75; display: block; transition: transform 0.4s ease, opacity 0.3s;
+    }
+    .hobby-card:hover .hobby-card-img img { transform: scale(1.07); opacity: 1; }
+    .hobby-card-body { padding: 1.4rem 1.5rem 1.75rem; }
+    .hobby-card-tag {
+      font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--red); font-weight: 700; margin-bottom: 0.5rem;
+    }
+    .hobby-card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--black); margin-bottom: 0.6rem;
+    }
+    .hobby-card-body p { font-size: 0.85rem; color: var(--grey-dark); line-height: 1.7; margin: 0; }
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm sticky-top">
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center text-decoration-none" href="index.html">
-            <img src="images/IconaSito1.png" alt="Logo" width="30" height="30" class="me-2">
-            <span class="text-danger fw-bold">Thomas Martelli</span>
-        </a>
+      <a class="navbar-brand d-flex align-items-center text-decoration-none" href="index.html">
+        <img src="images/IconaSito1.png" alt="Logo" width="28" height="28" class="me-2">
+        <span>Thomas Martelli</span>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="passioni.html">Passioni</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="scuola.html">Scuola</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pcto.html">FSL/PCTO</a>
-          </li>
+        <ul class="navbar-nav gap-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="passioni.html">Passioni</a></li>
+          <li class="nav-item"><a class="nav-link" href="scuola.html">Scuola</a></li>
+          <li class="nav-item"><a class="nav-link" href="pcto.html">FSL/PCTO</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Carosello Passioni -->
-  <div id="passioniCarousel" class="carousel slide my-5" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#passioniCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
-      <button type="button" data-bs-target="#passioniCarousel" data-bs-slide-to="1"></button>
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-eyebrow">Portfolio · ITIS · 2026</div>
+    <h1>Le Mie <span>Passioni</span></h1>
+    <div class="hero-divider"></div>
+  </div>
+
+  <!-- Carousel Section -->
+  <div class="carousel-section">
+    <div class="slide-tabs">
+      <button class="slide-tab active" data-slide="0">Sport</button>
+      <button class="slide-tab" data-slide="1">Film, Anime &amp; Games</button>
     </div>
 
-    <div class="carousel-inner">
+    <div id="passioniCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+      <div class="carousel-inner">
 
-      <!-- Slide 1: Sport -->
-      <div class="carousel-item active">
-        <div class="container py-5 text-center" style="min-height: 60vh; background-color: #f8f9fa;">
-          <h2 class="text-danger mb-3">Lo Sport</h2>
-          <p class="mx-auto" style="max-width: 700px;">
-            Una delle mie più grandi passioni è lo sport. Mi tiene in forma, mi dà energia e mi aiuta a concentrarmi.
-          </p>
-          <div class="d-flex justify-content-center gap-4 mt-4 flex-wrap section-images">
-            <img src="images/sport1.jpg" class="img-fluid rounded shadow" alt="Sport 1">
-            <img src="images/sport2.jpg" class="img-fluid rounded shadow" alt="Sport 2">
-          </div>
-          <br>
-          <p class="mx-auto" style="max-width: 700px;">
-            Lo sport che pratico è il CrossFit. Mi sono approcciato a questa disciplina all'età di 15 anni e fin da subito mi ha invogliato a continuare per migliorare il mio livello di fitness. Mi piacerebbe continuare questo percorso per diventare un atleta migliore giorno dopo giorno.
-            <br>Attraverso l'allenamento sto migliorando giorno dopo giorno sia a livello di skills, sia a livello fisico.
-          </p>
-          <div class="mt-4">
-            <a href="https://www.instagram.com/_thomarte_/" target="_blank" class="text-danger fs-3 me-3">
-              <i class="bi bi-instagram"></i>
-            </a>
-            <a href="https://github.com/Thumad" target="_blank" class="text-dark fs-3">
-              <i class="bi bi-github"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2: Passioni secondarie -->
-      <div class="carousel-item">
-        <div class="container py-5 text-center" style="min-height: 60vh; background-color: #e9ecef;">
-          <h2 class="text-danger mb-3">Film, Anime e VideoGames</h2>
-
-          <!-- Primo paragrafo + immagine -->
-          <p class="mx-auto" style="max-width: 700px;">
-            Per rilassarmi alla fine di una giornata, mi rilasso guardando dei film o delle serie tv. Di solito sono attratto dai generi horror e azione/comici. 
-          </p>
-          <div class="d-flex justify-content-center gap-4 mt-4 flex-wrap section-images">
-            <img src="images/film.jpg" class="img-fluid rounded shadow" alt="Film">
-          </div>
-          <br>
-
-          <!-- SEZIONE MANGA MODIFICATA -->
-          <div class="row align-items-center justify-content-center my-4">
-            <div class="col-md-4 text-center">
-              <img src="images/manga.jpg" class="img-fluid rounded shadow" alt="Manga">
+        <!-- Slide 1: Sport -->
+        <div class="carousel-item active">
+          <div class="sport-layout">
+            <div class="sport-img-duo">
+              <img src="images/sport1.jpg" alt="Sport 1">
+              <img src="images/sport2.jpg" alt="Sport 2">
             </div>
-            <div class="col-md-6 text-start">
-              <p>
-                Da quando sono piccolo ho sempre guardato anime, e in particolare quelli a cui mi sono affezionato di più sono DragonBall e Naruto. Entrambi mi hanno insegnato varie cose riguardo agli obiettivi personali e al modo di affrontare le sfide della vita. Questi anime mi hanno sempre motivato a non arrendermi mai e a continuare a lottare per i miei sogni.
-              </p>
+            <div class="passion-text-side">
+              <div class="passion-number">01</div>
+              <h2>Lo <span>Sport</span></h2>
+              <div class="passion-divider"></div>
+              <p>Una delle mie più grandi passioni è lo sport. Mi tiene in forma, mi dà energia e mi aiuta a concentrarmi.</p>
+              <p>Lo sport che pratico è il <strong>CrossFit</strong>. Mi sono avvicinato a questa disciplina a 15 anni e fin da subito mi ha motivato a continuare per migliorare il mio livello di fitness.</p>
+              <p>Attraverso l'allenamento sto migliorando giorno dopo giorno sia a livello di skills, sia a livello fisico.</p>
+              <div class="passion-links mt-2">
+                <a href="https://www.instagram.com/_thomarte_/" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a href="https://github.com/Thumad" target="_blank"><i class="bi bi-github"></i></a>
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- Terzo paragrafo + immagine -->
-          <p class="mx-auto" style="max-width: 700px;">
-            Un aspetto importante della mia vita sono stati i Video Games con cui mi sono sempre divertito giocando sia con gli amici che da solo. Ho giocato a vari videogiochi e i migliori per me sono stati Fortnite, Valorant e Minecraft, i quali mi hanno permesso di divertirmi e di rilassarmi nei momenti di stress.
-          </p>
-          <div class="d-flex justify-content-center gap-4 mt-4 flex-wrap section-images">
-            <img src="images/videogames.jpg" class="img-fluid rounded shadow" alt="Videogames">
+        <!-- Slide 2: Hobby -->
+        <div class="carousel-item">
+          <div class="hobby-heading">
+            <h2>Film, <span>Anime</span> &amp; VideoGames</h2>
+            <p>Le passioni che mi accompagnano ogni giorno</p>
           </div>
-
-          <!-- Icone social -->
-          <div class="mt-4">
-            <a href="https://www.instagram.com/_thomarte_/" target="_blank" class="text-danger fs-3 me-3">
-              <i class="bi bi-instagram"></i>
-            </a>
-            <a href="https://github.com/Thumad" target="_blank" class="text-dark fs-3">
-              <i class="bi bi-github"></i>
-            </a>
+          <div class="hobby-grid">
+            <div class="hobby-card">
+              <div class="hobby-card-img"><img src="images/film.jpg" alt="Film"></div>
+              <div class="hobby-card-body">
+                <div class="hobby-card-tag">Cinema</div>
+                <h3>Film &amp; Serie TV</h3>
+                <p>Per rilassarmi a fine giornata guardo film o serie TV. Sono attratto dai generi horror e azione/comici.</p>
+              </div>
+            </div>
+            <div class="hobby-card">
+              <div class="hobby-card-img"><img src="images/manga.jpg" alt="Anime"></div>
+              <div class="hobby-card-body">
+                <div class="hobby-card-tag">Animazione</div>
+                <h3>Anime &amp; Manga</h3>
+                <p>DragonBall e Naruto mi hanno insegnato molto sugli obiettivi personali e sul non arrendersi mai di fronte alle difficoltà.</p>
+              </div>
+            </div>
+            <div class="hobby-card">
+              <div class="hobby-card-img"><img src="images/videogames.jpg" alt="Videogames"></div>
+              <div class="hobby-card-body">
+                <div class="hobby-card-tag">Gaming</div>
+                <h3>VideoGames</h3>
+                <p>Fortnite, Valorant e Minecraft sono i titoli che mi hanno permesso di divertirmi e rilassarmi, da solo e con gli amici.</p>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <div class="passion-links" style="display:inline-flex;">
+              <a href="https://www.instagram.com/_thomarte_/" target="_blank"><i class="bi bi-instagram"></i></a>
+              <a href="https://github.com/Thumad" target="_blank"><i class="bi bi-github"></i></a>
+            </div>
           </div>
         </div>
+
       </div>
 
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#passioniCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#passioniCarousel" data-bs-slide-to="1"></button>
+      </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="bg-light text-center text-muted fixed-bottom py-2 border-top">
-    © 2026 Thomas Martelli - Tutti i diritti riservati
+  <footer class="text-center fixed-bottom py-2">
+    © 2026 <span>Thomas Martelli</span> — Tutti i diritti riservati
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const carousel = document.getElementById('passioniCarousel');
+    const bsCarousel = bootstrap.Carousel.getOrCreateInstance(carousel, { ride: false, interval: false });
+    const tabs = document.querySelectorAll('.slide-tab');
+    tabs.forEach(t => t.addEventListener('click', () => bsCarousel.to(parseInt(t.dataset.slide))));
+    carousel.addEventListener('slid.bs.carousel', e => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tabs[e.to].classList.add('active');
+    });
+  </script>
 </body>
 </html>

@@ -6,126 +6,361 @@
   <title>Thomas Martelli - Portfolio</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link rel="icon" type="images/IconaSito1" href="icon/IconaSito1_white.png">
-  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="icon/IconaSito1_white.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red: #C0162C;
+      --red-dark: #8a0e1f;
+      --black: #0d0d0d;
+      --white: #ffffff;
+      --grey-light: #f5f5f5;
+      --grey-mid: #e0e0e0;
+      --grey-dark: #3a3a3a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background-color: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      background: var(--white) !important;
+      border-bottom: 2px solid var(--red) !important;
+      padding: 0.75rem 0;
+    }
+    .navbar-brand span {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--red) !important;
+      letter-spacing: 0.5px;
+    }
+    .nav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--black) !important;
+      position: relative;
+      padding: 0.5rem 1rem !important;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 1rem; right: 1rem;
+      height: 2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+    .nav-link:hover { color: var(--red) !important; }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* ─── FOOTER ─── */
+    footer.fixed-bottom {
+      font-size: 0.8rem;
+      background: var(--black) !important;
+      color: rgba(255,255,255,0.5);
+      border-top: 1px solid rgba(192,22,44,0.4) !important;
+      letter-spacing: 0.5px;
+      padding: 0.6rem 0;
+    }
+    footer span { color: var(--red); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── HOME HERO ─── */
+    .home-hero {
+      min-height: 100vh;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .home-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(192,22,44,0.06) 80px, rgba(192,22,44,0.06) 81px),
+        repeating-linear-gradient(0deg,  transparent, transparent 80px, rgba(192,22,44,0.06) 80px, rgba(192,22,44,0.06) 81px);
+      pointer-events: none;
+    }
+    .home-hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      position: relative;
+      animation: fadeUp 0.7s ease both;
+    }
+    .home-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin: 0;
+      position: relative;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .home-hero h1 span { color: var(--red); font-style: italic; }
+    .home-hero-subtitle {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-top: 1.25rem;
+      font-weight: 300;
+      position: relative;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+    .hero-line {
+      width: 60px; height: 3px;
+      background: var(--red);
+      margin: 2rem auto;
+      position: relative;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+    .hero-socials {
+      display: flex; gap: 1.75rem;
+      justify-content: center;
+      position: relative;
+      animation: fadeUp 0.7s ease 0.4s both;
+    }
+    .hero-socials a {
+      color: rgba(255,255,255,0.55);
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: color 0.25s, transform 0.25s;
+    }
+    .hero-socials a:hover { color: var(--red); transform: translateY(-3px); }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.2);
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      animation: fadeUp 0.7s ease 0.8s both;
+    }
+    .scroll-arrow {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, transparent, rgba(192,22,44,0.7));
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
+    }
+
+    /* ─── INFO + CONTACT SECTION ─── */
+    .info-section { padding: 5rem 1.5rem 4rem; }
+    .info-grid {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: start;
+    }
+    @media (max-width: 767px) { .info-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+    .info-block-label {
+      font-size: 0.7rem; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--red);
+      font-weight: 700; margin-bottom: 0.75rem;
+    }
+    .info-block h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900;
+      color: var(--black); margin-bottom: 0.75rem;
+    }
+    .info-block h2 span { color: var(--red); font-style: italic; }
+    .info-block-divider { width: 35px; height: 3px; background: var(--red); margin-bottom: 1.5rem; }
+    .info-block p { font-size: 0.92rem; line-height: 1.85; color: var(--grey-dark); }
+
+    .contact-list { list-style: none; padding: 0; margin: 0; }
+    .contact-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 0.9rem 0; border-bottom: 1px solid var(--grey-mid);
+    }
+    .contact-list li:last-child { border-bottom: none; }
+    .contact-icon { color: var(--red); font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
+    .contact-key { font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; color: #999; display: block; margin-bottom: 2px; }
+    .contact-val { font-size: 0.9rem; color: var(--black); font-weight: 500; }
+
+    /* ─── PAGE NAV CARDS ─── */
+    .pages-section { padding: 0 1.5rem 6rem; }
+    .section-label { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--red); font-weight: 700; margin-bottom: 0.4rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--black); margin-bottom: 2rem; }
+    .pages-grid {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    @media (max-width: 767px) { .pages-grid { grid-template-columns: 1fr; } }
+
+    .page-card {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      border: 2px solid var(--black);
+      border-radius: 6px;
+      overflow: hidden;
+      padding: 2rem 1.75rem 2.5rem;
+      background: var(--white);
+      transition: background 0.25s, border-color 0.25s, transform 0.3s;
+    }
+    .page-card:hover {
+      background: var(--black);
+      border-color: var(--red);
+      transform: translateY(-5px);
+    }
+    .page-card-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 900;
+      color: var(--grey-mid); line-height: 1;
+      transition: color 0.25s;
+    }
+    .page-card:hover .page-card-num { color: rgba(192,22,44,0.25); }
+    .page-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--black); margin: 0.5rem 0 0.75rem;
+      transition: color 0.25s;
+    }
+    .page-card:hover .page-card-title { color: var(--white); }
+    .page-card-desc {
+      font-size: 0.83rem; color: var(--grey-dark);
+      line-height: 1.65; transition: color 0.25s;
+    }
+    .page-card:hover .page-card-desc { color: rgba(255,255,255,0.5); }
+    .page-card-arrow {
+      position: absolute; bottom: 1.5rem; right: 1.5rem;
+      color: var(--red); font-size: 1.2rem;
+      opacity: 0; transform: translateX(-6px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .page-card:hover .page-card-arrow { opacity: 1; transform: translateX(0); }
+  </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand d-flex align-items-center text-decoration-none" href="index.html">
-        <img src="images/IconaSito1.png" alt="Logo" width="30" height="30" class="me-2">
-        <span class="text-danger fw-bold">Thomas Martelli</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="passioni.html">Passioni</a></li>
-        <li class="nav-item"><a class="nav-link" href="scuola.html">Scuola</a></li>
-        <li class="nav-item"><a class="nav-link" href="pcto.html">FSL/PCTO</a></li>
-      </ul>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center text-decoration-none" href="index.html">
+        <img src="images/IconaSito1.png" alt="Logo" width="28" height="28" class="me-2">
+        <span>Thomas Martelli</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav gap-1">
+          <li class="nav-item"><a class="nav-link" href="passioni.html">Passioni</a></li>
+          <li class="nav-item"><a class="nav-link" href="scuola.html">Scuola</a></li>
+          <li class="nav-item"><a class="nav-link" href="pcto.html">FSL/PCTO</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<br><br><br>
-<!-- Carosello -->
-<div id="mainCarousel" class="carousel slide" data-bs-ride="false">
-    <!-- Indicatori -->
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  <!-- Hero -->
+  <div class="home-hero">
+    <div class="home-hero-eyebrow">Portfolio · 2026</div>
+    <h1>Thomas<br><span>Martelli</span></h1>
+    <p class="home-hero-subtitle">Studente &amp; Atleta</p>
+    <div class="hero-line"></div>
+    <div class="hero-socials">
+      <a href="https://www.instagram.com/_thomarte_/" target="_blank"><i class="bi bi-instagram"></i></a>
+      <a href="https://github.com/Thumad" target="_blank"><i class="bi bi-github"></i></a>
     </div>
-  
-    <!-- Slide -->
-    <div class="carousel-inner">
-  
-      <!-- Slide 1 -->
-      <div class="carousel-item active">
-        <div class="d-flex justify-content-center align-items-center py-5" style="min-height: 60vh; background-color: #f8f9fa;">
-          <div class="text-center">
-            <h1 class="display-4 text-danger">Thomas Martelli</h1>
-            <p class="lead">Studente & Atleta</p>
-            <!-- Icone Social -->
-            <div class="mt-4">
-                <a href="https://www.instagram.com/_thomarte_/" target="_blank" class="text-danger fs-3 me-3">
-                <i class="bi bi-instagram"></i>
-                </a>
-                <a href="https://github.com/Thumad" target="_blank" class="text-dark fs-3">
-                <i class="bi bi-github"></i>
-                </a>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!-- Slide 2 -->
-      <div class="carousel-item">
-        <div class="d-flex justify-content-center align-items-center py-5" style="min-height: 60vh; background-color: #e9ecef;">
-          <img src="images/profile.jpg" class="img-fluid rounded-circle shadow" alt="Foto di Thomas" style="max-height: 300px;">
-        </div>
-        <!-- Icone Social -->
-        <div class="mt-4">
-            <a href="https://www.instagram.com/_thomarte_/" target="_blank" class="text-danger fs-3 me-3">
-            <i class="bi bi-instagram"></i>
-            </a>
-            <a href="https://github.com/Thumad" target="_blank" class="text-dark fs-3">
-            <i class="bi bi-github"></i>
-            </a>
-        </div>
-      </div>
-  
-      <!-- Slide 3 -->
-      <div class="carousel-item">
-        <div class="d-flex justify-content-center align-items-center py-5" style="min-height: 60vh; background-color: #f1f1f1;">
-          <div class="container text-center" style="max-width: 700px;">
-            <h2 class="mb-3">Chi sono?</h2>
-            <p>
-              Sono uno studente del corso di informatica, appassionato di sport, tra i quali spunta il CrossFit.<br>
-              Mi piace molto la palestra, che insieme alla musica e al guardare serie TV o film, mi aiuta a rilassarmi e a stare bene.
-            </p>
-            <hr class="my-4">
-            <h3 id="contact">Come Contattarmi:</h3>
-            <div class="text-start mt-3">
-              <p><strong>Email:</strong> thomas.martelli21@gmail.com</p>
-              <p><strong>Numero:</strong> +39 349 733 7982</p>
-              <p><strong>Indirizzo:</strong> Piazza Pertini 1</p>
-              <p><strong>Città:</strong> Chiaravalle</p>
-            </div>
-            <!-- Icone Social -->
-            <div class="text-center mt-4">
-              <a href="https://www.instagram.com/_thomarte_/" target="_blank" class="text-danger fs-3 me-3">
-                <i class="bi bi-instagram"></i>
-              </a>
-              <a href="https://github.com/Thumad" target="_blank" class="text-dark fs-3">
-                <i class="bi bi-github"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
+    <div class="hero-scroll-hint">
+      <span>Scorri</span>
+      <div class="scroll-arrow"></div>
     </div>
   </div>
-  
-    <!-- Controlli -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
+
+  <!-- Chi sono + Contatti -->
+  <div class="info-section">
+    <div class="info-grid">
+      <div class="info-block">
+        <div class="info-block-label">Chi sono</div>
+        <h2>Una breve <span>presentazione</span></h2>
+        <div class="info-block-divider"></div>
+        <p>Sono uno studente del corso di informatica, appassionato di sport — tra cui spicca il CrossFit, che pratico da quando avevo 15 anni.</p>
+        <p style="margin-top:1rem;">Mi piace la palestra, che insieme alla musica e al guardare serie TV o film mi aiuta a rilassarmi. Questo portfolio raccoglie il mio percorso scolastico, le mie passioni e le esperienze di PCTO.</p>
+      </div>
+      <div class="info-block">
+        <div class="info-block-label">Contatti</div>
+        <h2>Come <span>trovarmi</span></h2>
+        <div class="info-block-divider"></div>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-icon"><i class="bi bi-envelope-fill"></i></span>
+            <div><span class="contact-key">Email</span><span class="contact-val">thomas.martelli21@gmail.com</span></div>
+          </li>
+          <li>
+            <span class="contact-icon"><i class="bi bi-telephone-fill"></i></span>
+            <div><span class="contact-key">Telefono</span><span class="contact-val">+39 349 733 7982</span></div>
+          </li>
+          <li>
+            <span class="contact-icon"><i class="bi bi-geo-alt-fill"></i></span>
+            <div><span class="contact-key">Città</span><span class="contact-val">Chiaravalle, Piazza Pertini 1</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
-<br>
-  <footer class="bg-light text-center text-muted fixed-bottom py-2 border-top">
-    © 2026 Thomas Martelli - Tutti i diritti riservati
+
+  <!-- Sezioni -->
+  <div class="pages-section">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div class="section-label">Esplora</div>
+      <div class="section-title">Le sezioni del sito</div>
+    </div>
+    <div class="pages-grid">
+      <a href="passioni.html" class="page-card">
+        <div class="page-card-num">01</div>
+        <div class="page-card-title">Passioni</div>
+        <div class="page-card-desc">Sport, anime, film e videogiochi: tutto ciò che mi appassiona fuori dalla scuola.</div>
+        <div class="page-card-arrow"><i class="bi bi-arrow-right"></i></div>
+      </a>
+      <a href="scuola.html" class="page-card">
+        <div class="page-card-num">02</div>
+        <div class="page-card-title">Scuola</div>
+        <div class="page-card-desc">Le 12 materie dell'ITIS e i progetti sviluppati in team durante il quinto anno.</div>
+        <div class="page-card-arrow"><i class="bi bi-arrow-right"></i></div>
+      </a>
+      <a href="pcto.html" class="page-card">
+        <div class="page-card-num">03</div>
+        <div class="page-card-title">FSL / PCTO</div>
+        <div class="page-card-desc">L'esperienza in azienda da Menerva SRL e la settimana di formazione a scuola.</div>
+        <div class="page-card-arrow"><i class="bi bi-arrow-right"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center fixed-bottom py-2">
+    © 2026 <span>Thomas Martelli</span> — Tutti i diritti riservati
   </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
