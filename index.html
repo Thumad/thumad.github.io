@@ -220,10 +220,11 @@
     .section-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--black); margin-bottom: 2rem; }
     .pages-grid {
       max-width: 1000px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
     }
-    @media (max-width: 767px) { .pages-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 991px) { .pages-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .pages-grid { grid-template-columns: 1fr; } }
 
     .page-card {
       position: relative;
@@ -366,6 +367,12 @@
         <div class="page-card-num">03</div>
         <div class="page-card-title">FSL / PCTO</div>
         <div class="page-card-desc">L'esperienza in azienda da Menerva SRL e la settimana di formazione a scuola.</div>
+        <div class="page-card-arrow"><i class="bi bi-arrow-right"></i></div>
+      </a>
+      <a href="educazione_civica.html" class="page-card">
+        <div class="page-card-num">04</div>
+        <div class="page-card-title">Ed. Civica</div>
+        <div class="page-card-desc">AI, fake news, deepfake e cybersicurezza: i rischi del digitale e come difendersi.</div>
         <div class="page-card-arrow"><i class="bi bi-arrow-right"></i></div>
       </a>
     </div>
