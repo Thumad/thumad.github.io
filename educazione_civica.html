@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Educazione Civica - Thomas Martelli</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link rel="icon" href="icon/IconaSito1_white.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red: #C0162C;
+      --black: #0d0d0d;
+      --white: #ffffff;
+      --grey-light: #f5f5f5;
+      --grey-mid: #e0e0e0;
+      --grey-dark: #3a3a3a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background-color: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    .navbar {
+      background: var(--white) !important;
+      border-bottom: 2px solid var(--red) !important;
+      padding: 0.75rem 0;
+    }
+    .navbar-brand span {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 1.3rem;
+      color: var(--red) !important; letter-spacing: 0.5px;
+    }
+    .nav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500; font-size: 0.9rem;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--black) !important;
+      position: relative; padding: 0.5rem 1rem !important;
+      transition: color 0.3s;
+    }
+    .nav-link::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 1rem; right: 1rem;
+      height: 2px; background: var(--red);
+      transform: scaleX(0); transition: transform 0.3s ease;
+    }
+    .nav-link:hover { color: var(--red) !important; }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      background: var(--black);
+      padding: 3.5rem 0 2.5rem;
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(192,22,44,0.06) 80px, rgba(192,22,44,0.06) 81px),
+        repeating-linear-gradient(0deg,  transparent, transparent 80px, rgba(192,22,44,0.06) 80px, rgba(192,22,44,0.06) 81px);
+      pointer-events: none;
+    }
+    .page-hero-eyebrow {
+      font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.75rem; font-weight: 600;
+    }
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900;
+      color: var(--white); margin: 0; line-height: 1.1;
+    }
+    .page-hero h1 span { color: var(--red); font-style: italic; }
+    .hero-divider { width: 60px; height: 3px; background: var(--red); margin: 1.5rem auto 0; }
+
+    /* ─── CAROUSEL ─── */
+    .carousel-section { padding: 3rem 1.5rem 5rem; background: var(--white); }
+
+    .slide-tabs {
+      display: flex; justify-content: center;
+      margin-bottom: 2.5rem;
+      border: 2px solid var(--black); width: fit-content;
+      margin-left: auto; margin-right: auto;
+      overflow: hidden; border-radius: 4px; flex-wrap: wrap;
+    }
+    .slide-tab {
+      padding: 0.65rem 1.6rem;
+      font-family: 'DM Sans', sans-serif; font-weight: 600;
+      font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase;
+      background: transparent; border: none; color: var(--black);
+      cursor: pointer; transition: background 0.25s, color 0.25s;
+      border-right: 2px solid var(--black); white-space: nowrap;
+    }
+    .slide-tab:last-child { border-right: none; }
+    .slide-tab.active { background: var(--red); color: var(--white); }
+    .slide-tab:not(.active):hover { background: var(--grey-light); }
+
+    .carousel-inner { margin: 0 auto; max-width: 1100px; border-radius: 0; box-shadow: none; border: none; }
+    .carousel-item { background: transparent; transition: transform 0.5s ease, opacity 0.5s ease; }
+
+    .carousel-indicators { position: static; margin-top: 2.5rem; gap: 8px; }
+    .carousel-indicators [data-bs-target] {
+      background-color: var(--grey-mid); width: 36px; height: 4px;
+      border-radius: 2px; border: none; opacity: 1;
+      transition: background 0.3s, width 0.3s;
+    }
+    .carousel-indicators .active { background-color: var(--red); width: 60px; }
+
+    /* ─── LAYOUT ARTICOLO (slide principale) ─── */
+    .article-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 2px solid var(--black); border-radius: 8px;
+      overflow: hidden; max-width: 960px; margin: 0 auto;
+    }
+    @media (max-width: 767px) { .article-layout { grid-template-columns: 1fr; } }
+
+    .article-text-side {
+      padding: 2.5rem 2.5rem 2rem; background: var(--white);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .article-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem; font-weight: 900;
+      color: var(--grey-mid); line-height: 1;
+      margin-bottom: 0.25rem; user-select: none;
+    }
+    .article-text-side h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900;
+      color: var(--black); margin-bottom: 0.4rem; line-height: 1.2;
+    }
+    .article-text-side h2 span { color: var(--red); }
+    .article-divider { width: 40px; height: 3px; background: var(--red); margin-bottom: 1.25rem; }
+    .article-text-side p { font-size: 0.9rem; color: var(--grey-dark); line-height: 1.8; margin-bottom: 1rem; }
+    .article-meta { font-size: 0.76rem !important; color: #999 !important; margin-bottom: 0 !important; }
+
+    /* Lato destro scuro con icona/stat */
+    .article-dark-side {
+      background: var(--black);
+      padding: 2.5rem;
+      display: flex; flex-direction: column; justify-content: center; gap: 2rem;
+    }
+    .stat-block { border-left: 3px solid var(--red); padding-left: 1.25rem; }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem; font-weight: 900;
+      color: var(--white); line-height: 1; margin-bottom: 0.2rem;
+    }
+    .stat-number span { color: var(--red); }
+    .stat-label {
+      font-size: 0.78rem; color: rgba(255,255,255,0.55);
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .stat-desc {
+      font-size: 0.82rem; color: rgba(255,255,255,0.65);
+      line-height: 1.6; margin-top: 0.5rem;
+    }
+
+    /* ─── TEMA LAYOUT (slide testo lungo) ─── */
+    .tema-card {
+      max-width: 960px; margin: 0 auto;
+      border: 2px solid var(--black); border-radius: 8px; overflow: hidden;
+    }
+    .tema-header {
+      background: var(--black); padding: 2rem 2.5rem;
+      display: flex; align-items: flex-end; gap: 1.5rem;
+    }
+    .tema-header-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem; font-weight: 900;
+      color: rgba(192,22,44,0.25); line-height: 1; flex-shrink: 0;
+    }
+    .tema-header-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--white); margin: 0;
+    }
+    .tema-header-text h2 span { color: var(--red); }
+    .tema-header-text p {
+      font-size: 0.75rem; color: rgba(255,255,255,0.4);
+      letter-spacing: 2px; text-transform: uppercase; margin: 0.3rem 0 0;
+    }
+    .tema-body {
+      padding: 2.5rem; background: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;
+    }
+    @media (max-width: 767px) { .tema-body { grid-template-columns: 1fr; } }
+    .tema-body p { font-size: 0.9rem; color: var(--grey-dark); line-height: 1.85; margin-bottom: 1rem; }
+    .tema-body p:last-child { margin-bottom: 0; }
+
+    /* Quote block */
+    .quote-block {
+      border-left: 4px solid var(--red);
+      padding: 1rem 1.5rem;
+      background: var(--grey-light);
+      border-radius: 0 4px 4px 0;
+      margin-top: 1.5rem;
+    }
+    .quote-block p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem !important; font-style: italic;
+      color: var(--black) !important; margin: 0 !important; line-height: 1.6 !important;
+    }
+    .quote-block cite {
+      font-size: 0.72rem; color: var(--red);
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-top: 0.6rem; display: block; font-style: normal; font-weight: 700;
+    }
+
+    /* ─── TAG CHIPS ─── */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .tag {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border: 1.5px solid var(--black); border-radius: 2px;
+      color: var(--black); background: transparent;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .tag:hover { background: var(--red); color: var(--white); border-color: var(--red); }
+    .tag.red { background: var(--red); color: var(--white); border-color: var(--red); }
+
+    /* ─── FOOTER ─── */
+    footer.fixed-bottom {
+      font-size: 0.8rem; background: var(--black) !important;
+      color: rgba(255,255,255,0.5);
+      border-top: 1px solid rgba(192,22,44,0.4) !important;
+      letter-spacing: 0.5px; padding: 0.6rem 0;
+    }
+    footer span { color: var(--red); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center text-decoration-none" href="index.html">
+        <img src="images/IconaSito1.png" alt="Logo" width="28" height="28" class="me-2">
+        <span>Thomas Martelli</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav gap-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="passioni.html">Passioni</a></li>
+          <li class="nav-item"><a class="nav-link" href="scuola.html">Scuola</a></li>
+          <li class="nav-item"><a class="nav-link" href="pcto.html">FSL/PCTO</a></li>
+          <li class="nav-item"><a class="nav-link" href="educazione_civica.html">Ed. Civica</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="page-hero-eyebrow">Portfolio · ITIS · 2026</div>
+    <h1>Educazione <span>Civica</span></h1>
+    <div class="hero-divider"></div>
+  </div>
+
+  <!-- Carousel -->
+  <div class="carousel-section">
+    <div class="slide-tabs">
+      <button class="slide-tab active" data-slide="0">Il Problema delle AI</button>
+      <button class="slide-tab" data-slide="1">Fake News &amp; Deepfake</button>
+      <button class="slide-tab" data-slide="2">Cybersicurezza</button>
+    </div>
+
+    <div id="edcivicaCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+      <div class="carousel-inner">
+
+        <!-- ── SLIDE 1: Il problema delle AI ── -->
+        <div class="carousel-item active">
+          <div class="article-layout">
+            <div class="article-text-side">
+              <div class="article-number">01</div>
+              <h2>Il Problema <span>delle AI</span></h2>
+              <div class="article-divider"></div>
+              <p>Al giorno d'oggi esistono sempre più modi per far credere alle persone ciò che si vuole. Il metodo più comune e più comodo è attraverso la rete, dato che ormai tutti sono connessi.</p>
+              <p>Ormai le persone utilizzano così tanto le intelligenze artificiali che quasi tutti possono essere in grado di creare delle fake news o contenuti falsi. Queste AI si stanno evolvendo sempre di più e diventerà molto più difficile riconoscere ciò che è falso dalla verità.</p>
+              <div class="tag-row">
+                <span class="tag red">Intelligenza Artificiale</span>
+                <span class="tag">Fake News</span>
+                <span class="tag">Disinformazione</span>
+              </div>
+            </div>
+            <div class="article-dark-side">
+              <div class="stat-block">
+                <div class="stat-number">68<span>%</span></div>
+                <div class="stat-label">degli italiani</div>
+                <div class="stat-desc">si è imbattuto in fake news online almeno una volta alla settimana, secondo una ricerca Reuters 2024.</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-number">+<span>900</span>%</div>
+                <div class="stat-label">crescita deepfake</div>
+                <div class="stat-desc">Il numero di video deepfake rilevati online è cresciuto di quasi 10 volte tra il 2022 e il 2024.</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-number">3<span>s</span></div>
+                <div class="stat-label">per clonare una voce</div>
+                <div class="stat-desc">Bastano pochi secondi di audio per replicare la voce di una persona con i moderni strumenti AI.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SLIDE 2: Fake News & Deepfake ── -->
+        <div class="carousel-item">
+          <div class="tema-card">
+            <div class="tema-header">
+              <div class="tema-header-num">02</div>
+              <div class="tema-header-text">
+                <h2>Fake News <span>&amp; Deepfake</span></h2>
+                <p>Contenuti falsi e disinformazione nell'era digitale</p>
+              </div>
+            </div>
+            <div class="tema-body">
+              <div>
+                <p>Oltre alle notizie false vengono creati anche molti contenuti multimediali falsi come video e foto, per esempio di politici che annunciano cose che le persone non si aspettano, o anche video semplicemente con lo scopo di mettere in ridicolo una celebrità.</p>
+                <p>A causa della qualità con cui vengono creati questi contenuti, molte persone non riescono a distinguerli. A causa della creazione e diffusione di contenuti e documenti falsi si crea sempre più scompiglio tra le persone nell'opinione pubblica.</p>
+                <div class="quote-block">
+                  <p>"Per comprendere se qualcosa è stato scritto da un'intelligenza artificiale sono anche stati creati dei siti appositi."</p>
+                  <cite>Dal tema — Thomas Martelli</cite>
+                </div>
+              </div>
+              <div>
+                <p>Un esempio può essere trovato anche a scuola, dove vari professori utilizzano strumenti o direttamente IA per controllare se gli studenti hanno fruito delle intelligenze artificiali per il proprio compito.</p>
+                <p>Tutto ciò per dire che al giorno d'oggi è ormai necessario capire da dove vengono certe informazioni per poter verificare l'affidabilità di ciò che si legge o vede.</p>
+                <p>I deepfake non sono solo un problema di immagine — possono essere usati per truffe finanziarie, diffamazione, manipolazione politica e molto altro. Riconoscerli è diventata una competenza fondamentale del cittadino digitale moderno.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SLIDE 3: Cybersicurezza ── -->
+        <div class="carousel-item">
+          <div class="article-layout">
+            <div class="article-text-side">
+              <div class="article-number">03</div>
+              <h2>Cyber<span>sicurezza</span></h2>
+              <div class="article-divider"></div>
+              <p>Un altro tipo di inganno può essere quello della creazione di siti falsi con lo scopo di ottenere le informazioni personali e private di una persona. Sempre con lo stesso scopo esistono anche messaggi e mail di profili falsi.</p>
+              <p>A causa di questi siti e utenti falsi si ha anche un grande problema legato alla cybersicurezza. Ogni persona dovrebbe essere attenta a dove inserisce i propri dati e dovrebbe sempre verificare da dove deriva ciò che legge o vede sui social media e in generale online.</p>
+              <div class="tag-row">
+                <span class="tag red">Phishing</span>
+                <span class="tag">Privacy</span>
+                <span class="tag">Sicurezza Online</span>
+                <span class="tag">Social Media</span>
+              </div>
+            </div>
+            <div class="article-dark-side">
+              <div class="stat-block">
+                <div class="stat-number">1<span>ogni 39s</span></div>
+                <div class="stat-label">attacco informatico</div>
+                <div class="stat-desc">Nel mondo avviene un attacco hacker ogni 39 secondi. La maggior parte colpisce utenti comuni tramite phishing.</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-number">83<span>%</span></div>
+                <div class="stat-label">delle truffe online</div>
+                <div class="stat-desc">Iniziano con un'email o un messaggio falso. Riconoscere il mittente è la prima linea di difesa.</div>
+              </div>
+              <div class="stat-block">
+                <div class="stat-number"><span>&#8593;</span>58<span>%</span></div>
+                <div class="stat-label">casi phishing 2024</div>
+                <div class="stat-desc">I casi di phishing in Italia sono aumentati del 58% nel 2024 rispetto all'anno precedente.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /carousel-inner -->
+
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#edcivicaCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#edcivicaCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#edcivicaCarousel" data-bs-slide-to="2"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center fixed-bottom py-2">
+    © 2026 <span>Thomas Martelli</span> — Tutti i diritti riservati
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const carousel = document.getElementById('edcivicaCarousel');
+    const bsCarousel = bootstrap.Carousel.getOrCreateInstance(carousel, { ride: false, interval: false });
+    const tabs = document.querySelectorAll('.slide-tab');
+    tabs.forEach(t => t.addEventListener('click', () => bsCarousel.to(parseInt(t.dataset.slide))));
+    carousel.addEventListener('slid.bs.carousel', e => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tabs[e.to].classList.add('active');
+    });
+  </script>
+</body>
+</html>
